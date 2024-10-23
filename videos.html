@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vídeos Estilo TikTok</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="video-container">
+    <video class="video" muted playsinline loop>
+        <source src="file/Borderlands.O.Destino.do.Universo.Esta.em.Jogo.2024.1080p.WEB-DL.EAC3.AAC.DUAL.5.1.mkv" type="video/mp4">
+        Seu navegador não suporta o formato de vídeo.
+    </video>
+    <video class="video" muted playsinline loop>
+        <source src="file/A.Quiet.Place.Day.One.2024.720p.WEBRip.Dublado.mkv" type="video/mp4">
+        Seu navegador não suporta o formato de vídeo.
+    </video>
+    <video class="video" muted playsinline loop>
+        <source src="video3.mp4" type="video/mp4">
+        Seu navegador não suporta o formato de vídeo.
+    </video>
+</div>
+
+<script src="script.js">
+    const videos = document.querySelectorAll('.video');
+
+let currentVideoIndex = 0;
+
+// Inicia o primeiro vídeo
+videos[currentVideoIndex].play();
+
+// Função para parar o vídeo atual e iniciar o próximo
+function changeVideo() {
+    videos[currentVideoIndex].pause();
+    
+    currentVideoIndex = (currentVideoIndex + 1) % videos.length; // Vai para o próximo vídeo
+
+    videos[currentVideoIndex].play();
+}
+
+// Muda o vídeo quando o usuário rola para baixo
+document.querySelector('.video-container').addEventListener('wheel', (event) => {
+    if (event.deltaY > 0) {
+        changeVideo();
+    }
+});
+
+// Adiciona um evento para parar o vídeo ao sair da tela
+videos.forEach(video => {
+    video.addEventListener('ended', changeVideo);
+});
+
+</script>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    overflow: hidden; /* Remove a barra de rolagem do corpo */
+}
+
+.video-container {
+    height: 100vh; /* Altura total da janela de visualização */
+    overflow-y: scroll; /* Permite rolagem vertical */
+}
+
+.video {
+    width: 100%; /* Largura total da tela */
+    height: 100vh; /* Altura total da tela */
+    object-fit: cover; /* Cobre o espaço sem distorcer o vídeo */
+}
+
+</style>
+</body>
+</html>
